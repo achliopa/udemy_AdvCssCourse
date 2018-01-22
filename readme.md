@@ -13,10 +13,10 @@ use: `git config http.sslVerify false` to your repo to be able to push remote (N
 * materialize css style navigation, custom made
 * Boilerplate project by tutor. images , css and html boilerplate
 * in html file (html5 style) he has already imported:
-** stylesheet
-** favicon : `<link rel="shortcut icon" type="image/filetype" href="path">
-** title
-** googlefont(Lato)
+	* stylesheet
+	* favicon : `<link rel="shortcut icon" type="image/filetype" href="path">
+	* title
+	* googlefont(Lato)
 * stylesheet cotnains only color codes
 
 ## Lecture 6 - Building the Header - Pt.1
@@ -136,18 +136,18 @@ use: `git config http.sslVerify false` to your repo to be able to push remote (N
 ## Lecture 13 - How CSS works behind the Scenes: An Overview
 
 * Browser Render Flow: 
-** Load HTML -> Parse HTML-> DOM ->
-** Load CSS-> Parse CSS (Resolve conficts, process final values) -> CSSOM ->
-** -> Render Tree -> visual formating model -> Final Render
+	* Load HTML -> Parse HTML-> DOM ->
+	* Load CSS-> Parse CSS (Resolve conficts, process final values) -> CSSOM ->
+	* -> Render Tree -> visual formating model -> Final Render
 
 ## Lecture 14 - How CSS is Parsed, Part1: The cascade and Specificity
 
 *  A CSS rule is composed by *selector* `.my-class` and a *declaration block* `{color: blue;}` a *declaration* `color: blue;` is composed by a *property* `color:` and *declared value* `blue;`
 * The *cascade* is the process of combining different stylesheets and resolving conflicts between different CSS rules and declarations, when more than one rule applies to a certain element.
 * the cascade resolves issues witht he following criteria: **importance(weight)** > **specificity** > **source order**
-** Order of **Importance**: 1) User *!importance* declarations 2) Author *!important* declarations 3) Author declarations 4) User declarations 5) Default browser declarations  (e.g. `color: blue !important;`)
-** **Specificity** order: 1) Inline Styles 2) IDs 3) Classes, pseudo-classes, attributes 4) elements, pseudo-elements. Selector specificity gets a score (Inline occurences,IDs occurences,Classes Occurences, Elements occurences) e.g `.btn {}` => (0,0,1,0). To check order we check numbers from left to right.
-** The last declaration in code wins.
+	* Order of **Importance**: 1) User *!importance* declarations 2) Author *!important* declarations 3) Author declarations 4) User declarations 5) Default browser declarations  (e.g. `color: blue !important;`)
+	* **Specificity** order: 1) Inline Styles 2) IDs 3) Classes, pseudo-classes, attributes 4) elements, pseudo-elements. Selector specificity gets a score (Inline occurences,IDs occurences,Classes Occurences, Elements occurences) e.g `.btn {}` => (0,0,1,0). To check order we check numbers from left to right.
+	* The last declaration in code wins.
 * `!important` is a no-no same as code order
 * the universal selector `*` has NO specificity (0,0,0,0)
 * BE CAREFUL when importing 3rd party CSS. ALWAYS put our own stylesheet last to not have problems with order.
@@ -198,19 +198,32 @@ use: `git config http.sslVerify false` to your repo to be able to push remote (N
 * VFM definition: *Algorithm that calculates boxes and determines the layout of these boxes, for each element in the render tree, in order to determine the final layout of the page*
 * VFM takes into account: Dimensions of boxes, Box Types, Positioning Scheme,Stacking Contexs, elements in rendr tree, viewport size imaged dimentsions etc.
 * The box model is fundamental content is surrounded by padding which is surreounded by border which is surrounded by margin. the fill area that gets the background is content+ padding+ border
-** Box model total width = right border + right padding + width + left padding + left border
-** box model total height = top border + top padding + height + bottom padding + bottom border
-** `box-sizing: border-box;` makes life simpler with less calculations as height = total height and width = total width 
+	** Box model total width = right border + right padding + width + left padding + left border
+	** box model total height = top border + top padding + height + bottom padding + bottom border
+	** `box-sizing: border-box;` makes life simpler with less calculations as height = total height and width = total width 
 * Box Types:
-** Block-level boxes: elements formatted visually as blocks, 100% of parents width, vertically one after the other, box model applies. they are declared as `display: block` or *flex* or *list-item* or *table*
-** Inline boxes:  content is distributed in lines, ocupies only contejnt space, no line breaks, no heights and widths only horizontal paddings and margins (left right) `display: inline`
-** Inline-block boxes: a mix of block and inline, occupies only contents space, no line braks, box model applies `display: inline-block`
+	** Block-level boxes: elements formatted visually as blocks, 100% of parents width, vertically one after the other, box model applies. they are declared as `display: block` or *flex* or *list-item* or *table*
+	** Inline boxes:  content is distributed in lines, ocupies only contejnt space, no line breaks, no heights and widths only horizontal paddings and margins (left right) `display: inline`
+	** Inline-block boxes: a mix of block and inline, occupies only contents space, no line braks, box model applies `display: inline-block`
 * Positioning Schemes: 
-** Normal FLow: default positioning scheme, not floated, not absolute positioned, eleemts laid out according to their source order `position: relative`
-** FLoats: element is removed from normal flow, text and inline elements will wrap around the floated element, the container will **not** adjust its height tot he element . it is moved as far as posible to the parent componetns limits` float: right float: left`
-** Absolute positioning: element removed from normal flow, no impact on surrounding content (can overlap them), we use top, left, right, bottom to offset it from its relative postiioned container `position: absolute` `postion: fixed
+	* Normal FLow: default positioning scheme, not floated, not absolute positioned, eleemts laid out according to their source order `position: relative`
+	* FLoats: element is removed from normal flow, text and inline elements will wrap around the floated element, the container will **not** adjust its height tot he element . it is moved as far as posible to the parent componetns limits` float: right float: left`
+	* Absolute positioning: element removed from normal flow, no impact on surrounding content (can overlap them), we use top, left, right, bottom to offset it from its relative postiioned container `position: absolute` `postion: fixed
 * Stacking context: is the z-index the z axis stack. `z-index: -1` the higher index appears on top
 
-## Lecture 20 - CSS Architecture COmponents and BEM
+## Lecture 20 - CSS Architecture Components and BEM
 
-*
+* **Think** about the layout of yur webpage or webapp before writying code
+* **Build** the layout in HTML and CSS with constant structure in naming classes
+* Create a logical **architecture** for your CSS with files and folders
+* Think: Component Driven Design: create modular building blocks that make interfaces, held together by layout of page, re-usable across a project and between projects. Follows principle of Atomic Design
+* Build: Block Element Modifier (BEM): `.block {} .block__element {} .block__element--modifier {}
+	* BLOCK standalone component is meaningful on its own
+	* ELEMENT part of teh block tht has no meaning on its own
+	* MODIFIER a different version of a block or an element
+* Architect: 7-1 pattenn. & different folders for partial sass files , 1  main folder to import all other files into a compiled CSS stylsheet.
+* 7 folders (base/ components/ layout/ pages/ themes/ abstracts/ vendors/)
+
+## Lecture 21 - Implementing BEMs into Natours project
+
+* header is a block. logo-box is an element (has no meaning without the header) heading-primary is a block main is amodifier
