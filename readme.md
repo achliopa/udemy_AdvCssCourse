@@ -356,7 +356,7 @@ div {
 * extends is used to apply dry principle setting in the variable not the properties it includes but the selectors it is applied to. it copies selectors not properties. it is defined with % and is applied with @extend
 
 
-````
+```
 %btn-placeholder {
 	padding: 10px;
 	display: inline-block;
@@ -391,6 +391,7 @@ is translated to :
 }
 
 ```
+
 
 * we should prefer extend over mixin if the rules are thematicaly related
 
