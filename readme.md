@@ -227,3 +227,197 @@ use: `git config http.sslVerify false` to your repo to be able to push remote (N
 ## Lecture 21 - Implementing BEMs into Natours project
 
 * header is a block. logo-box is an element (has no meaning without the header) heading-primary is a block main is amodifier
+
+# Section 3 Intro to SASS and NPM
+
+## Lecture 23 - What is SASS?
+
+* SASS is CSS Preprocessor that adds power and elegance to the language
+* SASS Source ->Sass Compiler-> CSS Compiled Code
+* SASS gives us:
+	* **Variables** : for reusable values like corors, font-sizes, spacing etc
+	* **Nesting** : to nest selectors inside of one another allowing us to write less code
+	* **Operators : for mathematical operations right inside CSS
+	* **Partials and imports** : to write CSS in differenet files and import thme all in a single file
+	* **Mixins** : to write reusable pieces of CSS code
+	* **Functions** : similar to mixins, with the difference that they produce a valu that can be used
+	* **Extends** : to make different selectors inherit declarations that are common to all of them
+	* **Control Directives** : for writing complex code using conditionals and loops (not covered in the course)
+* SASS syntax:
+
+```
+.navigation
+	list-style: none
+	float: left
+& li
+	display: inline-block
+	margin-left: 30px
+```
+
+* SCSS syntax:
+
+```
+.navigation {
+	list-style: none;
+	float: left;
+
+	& li {
+		display: inline-block;
+		margin-left: 30px;
+	}
+}
+```
+
+## Lecture 24 - First Steps with SASS: Variables and Nesting
+
+* variables are deifned with $ *$variablename: variablevalue;* eg. `$color-text: #f2f2f2;` they are reusable and be placed in rules instead of the value e.g `color: $color-text;
+* Nesting is done instead of cascading selectiors e.g. `nav ul li {color: white;}` is equivalent to 
+
+```
+nav {
+	ul {
+		li {
+			color: white;
+		}
+	}
+}
+```
+
+* pseudoclasses can be nested by using the & symbol eg. `nav li::first {color: white;}` is equivalent to 
+
+```
+nav {
+	li {
+		&::first {
+			color: white;
+		}
+	}
+}
+```
+
+* if we set all elements in the save level with float: the parrent becomes inline collapses and loses its height (and background). to fix this we do the clear fix.
+in the parent element we add clearfix class which we syle as :
+
+```
+.clearfix::after {
+	conten: "";
+	clear: both;
+	display: table;
+}
+```
+
+## Lecture 25 - First Steps with SASS: Mixins Extends and Functions
+
+* mixina are reusable multiline object type set of properties that can be included in rules. they are  defined by the @mixin infront the mixinname and are called with @include mixinname e.g:
+
+```
+@mixin clearfix {
+	&::after {
+		conten: "";
+		clear: both;
+		display: table;
+	}
+}
+
+nav {
+	@include clearfix;
+}
+```
+
+* mixins can be parametrical. they can take variables as inputs like functions e.g.
+
+```
+@mixin style-link-text($color) {
+	text-decoration: none;
+	color: $color;
+}
+
+.link-1 {
+	@include style-link-text(#fff);
+}
+
+.link-2 {
+	@include style-link-text($color-dark);
+}
+
+* some functions are icluded in sass like `color: ligthen($color-dark,10%);`
+* they take some arguments do something with them and return a value
+* we can add custom  functions followin a prog . language syntax.
+
+```
+@function divide($a, $b) {
+	@return $a / $b;
+}
+
+div {
+	margin: divide(60, 3) * 1px; // = 20px
+}
+
+* extends is used to apply dry principle setting in the variable not the properties it includes but the selectors it is applied to. it copies selectors not properties. it is defined with % and is applied with @extend
+
+
+````
+%btn-placeholder {
+	padding: 10px;
+	display: inline-block;
+	text-align: center;
+} 
+
+.btn-main {
+	&:link {
+		@extend %btn-placeholder;
+	}
+}
+
+.btn-hot {
+	&:link {
+		@extend %btn-placeholder;
+		color: red;
+	}
+}
+```
+
+is translated to :
+
+```
+.btn-main:link, .btn-hot:link {
+	padding: 10px;
+	display: inline-block;
+	text-align: center;
+} 
+
+.btn-hot:link {
+	color: red;
+}
+
+```
+
+* we should prefer extend over mixin if the rules are thematicaly related
+
+## Lecture 27 - NPM Packages: Let's Install Packages Locally
+
+* in the project root folder
+* `npm init` then `npm install --save-dev node-sass` to install sass compiler as a dev tool. we dont need it in production as it will generate the css file for production. 
+
+## Lecture 28 - NPM Scripts: Let's Write And Compile SASS Locally
+
+* mkdir folder /sass in project . we create main.scss file and paste there all style.css code. css is valid scss.
+
+* we set our colors as variables. we use these variables at rgba value as `rgba($color-primary-light,0.8),` This works only in sass. to set an rbg hex value in rgba.
+
+* we compile by adding a script in package.json sripts object `    "compile:sass":"node-sass sass/main.scss css/style.css"`
+* this script takes as input sass/main.scss and compiles it to css/styles.css file.
+* the output is linked in the index.html for rendering
+* we call the script with npm run compile:sass in the root folder
+* we add -w flag int he end of our script to run as deamon and watch for changes
+
+## Lecture 29 - Auto reload page
+
+* we install live-server to reload our page as we save `npm install --g live-server`
+* we run it with `live server`
+
+# Section 5 - Natours Project - Using Advanced CSS and SASS (Part 2)
+
+## LEcture 31: Converting our COde to SASS: Vars and Nesting
+
+*
