@@ -308,7 +308,7 @@ in the parent element we add clearfix class which we syle as :
 
 ## Lecture 25 - First Steps with SASS: Mixins Extends and Functions
 
-* mixina are reusable multiline object type set of properties that can be included in rules. they are  defined by the @mixin infront the mixinname and are called with @include mixinname e.g:
+* mixin are reusable multiline object type set of properties that can be included in rules. they are  defined by the @mixin infront the mixinname and are called with @include mixinname e.g:
 
 ```
 @mixin clearfix {
@@ -419,6 +419,111 @@ is translated to :
 
 # Section 5 - Natours Project - Using Advanced CSS and SASS (Part 2)
 
-## LEcture 31: Converting our COde to SASS: Vars and Nesting
+## Lecture 31: Converting our COde to SASS: Vars and Nesting
 
-*
+* we start making all colors into sass variables
+* we nest our selectors. as we used BEM for naming and we style with classes there is not much space for nesting
+* we use the name interpolation character & we used in pseudoclasses to make nesting possible with classes.
+
+```
+.header {
+	color: black;
+}
+
+.header__logo-box {
+	color: red;
+}
+```
+
+becomes
+
+```
+.header {
+	color: black;
+	&__logo-box {
+		color: red;
+	}
+}
+
+## Lecture 32: Implementing the 7-! Architecture with Sass
+
+* 7-1 architecture makes sense i in large multipage projects
+* we import the files in our main.scss with `@import "folder/fileName";` without .scss
+* We create 7 subfolders in our sass folder 
+	* base: contains low level rules (animations,base, tyography,utils) as partials (_filename.scss)
+	* abstracts: contains code that is not gonna output any css (variables & mixins etc) as partials.
+	* compoents: for our components, reusable blocks that make our website or app
+	that need to be independent
+	* layouts: here we put project global layout styling (headers, footers and stuff)
+	* pages: if he have specific styles for a specific page , we create a file for the specific page with its name (_home.scss)
+	* themes: in case we do a webapp with different themes
+	* vendor: 3rd party css from e.g bootstrap
+
+* we import all the partials we created in main.scss
+* we restart the script compile:sass (it breaks when we create files)
+* we cut paste color variables in _variables.scss
+* we cut paste our basic selectors (html elements) rulesin _base.scss
+* @keyframe animations are cut paste in _animations.scss
+* .btn can become a component a building block that we can reuse so we create a file _button.scss in compoennts and cut paste .btn {}
+* .header can be used as a layout (global layout) or as a component. we choose to consider it global and create file _header.scss in layouts where we cut paste the rule.
+
+* .heading-primary we consider it typography so we place it in the respective file. it could be used as a component (questionalble)
+* we note that in many places we have typography stuff in rules. we should place them in _typography as well
+
+## **IMPORTANT NOTE** In @imports order is very important. import with order of folders and files (alphabeticaly)
+
+## Lecture 33 - Basic Principles of Responsive Design and Layout Types
+
+* Basic Responsive Design Principles
+	* Flow Grids and Layouts: To allow content to easily adapt to the current viewport width used to browse the website. uses % rather than px for layout related lengths
+	* Flexible/Responsive Images: Images behave differently than text content and so we need to ensure that they also adapt nicely to the current viewport
+	* Media Queries: To change styles on certain viewport width (breakpoint). allowing us to create different version of our website for different widths
+* Float Layouts are not new. they are globally supported . they do 1 dimension layouts.
+* Flex is new and easy for 1d layouts. CSS Grid is new and does 2d layout
+
+## Lecture 34 - Building a Custom Grid with Floats
+
+* Lecture objectives: how to architect and build a simple grid system. how the attribute selector works. how the :not pseudoclass works. how cal() works and whats the difference between calc() and simple Sass operations
+* we will buid a maximum 4 column grid.
+* columns aligned are always in a container called *.row*
+* we write html markup to test our grid style not for production
+* to implement our grid we do it in layout in a new _grid.scss file
+* we implement the .row rule adding the max-width: propery in rem. we use rem to easily change it with media queries also we use max-width to be able to shrink/adapt in small screens
+* we add `margin: 0 auto;` to .row to center it
+* we want a distance between rows  so we add `margin-bottom:`
+* we put length is _variables
+* we dont want the last row to have margin bottom so we use 
+
+```
+	&:not(:last-child) {
+		margin-bottom: $gutter-vertical;
+	}
+```
+
+* :not pseudoclasss reverses the pseudoclass wraped so in essence it says apply this rule to all but the wrapped pseudoclass . all except last-child
+* we place the column rules in the row rule as it is the logical order in our markup. (there is no sence in a column without row)
+* we use the css functiuon calc to calculate the width.`#{$variable}` to work.
+* we use not again to apply horizontal gutter and we use float: left to do the fluid layout. as we said before this makes the parent element colapse (the wrapping div) so it loses its height as it becomes inline. so we need the clearfix to solve it. we place it in mixins and we include it in row
+* to style columns we use scss atributes. this is a powerful selector that uses html attributes to select elelemnts for styling. its syntax is `[attr="someVal"] {}`, if we use instead of = ^= it means *if attribute val starts with..* $= it means *if attribute val ends with..*. e.g `[class^="col-"]{}`
+
+## Lecture 35 - Building the About Section: Part 1
+
+* Lecture Objectives: Thinking about components, how and why to use classes, how to use the *background-clip* property, how to *transform* multiple properties simultaneously, how to use *outline-offset* property together with *outline*, how to style elements that are NOT hovered while others are.
+
+* we add a new section to our markup: `<main></main>` to telle search engines this is the maain part of our website. header+ main+footer
+* he uses emmet (sublime palugin) (yeah right...)
+* we add a new section (its styles in _home.scss and a new heading (in _typography.scss)
+* we style our section adding a large padding and background color. to eliminate the white triangle header we move up the section by a negative margin (95vh -75vh = 20vh)
+* in typography we style secondary heading. a trick to make it a gradient color is shown below
+
+```
+	display: inline-block;
+	background: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+	-webkit-background-clip: text;
+	color: transparent;
+```
+
+* what we do is we set a background image gradient. we make it the size of text with inline -block, then we use the webit propery background-clip. to clip it around text and then we dissaperear the text to make it appear from behind.
+* we add an animation with transform when hovering over. we use skewY to distort on Y axis `transform: skeyY(2deg);` we apply it to the element with `transition: all .2s;`
+* with transform we can cascade transformations
+* *text-shadow* property is the same with *box-shadow* but for text
