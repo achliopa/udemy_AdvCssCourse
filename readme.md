@@ -527,3 +527,70 @@ becomes
 * we add an animation with transform when hovering over. we use skewY to distort on Y axis `transform: skeyY(2deg);` we apply it to the element with `transition: all .2s;`
 * with transform we can cascade transformations
 * *text-shadow* property is the same with *box-shadow* but for text
+* we need to center it. the way to do it is to put it in a parent element and center that
+* we will use *utility classes* to do this. utility classes are simple calsses in CSS that have only one goal. in our case is to center the child element
+* they are used with reusability in mind and placed in _utilities partial scss file
+* we center it with text-align as the heading is styled as inline-block so it is positioned as inline element (text)
+* we want to use the grid to position elements so we copy paste blocks from our test markup. styling is already there and tested
+* we need spacing after the secondary heading BUT we want it resusable and in other uses the margin requirements are digfferent
+* to solve it we use a utility class!
+
+## Lecture 36 - Building the About Section: Part 2
+
+* we add h3 and paragraph and style it with typography and utility classes. we use psedoclasses and elector interpolatiuon with &. nothing new
+* we start bulding a new buttona as an anchor. we style in _buttons.
+* padding and borders for small buttons is better to be in px not rem.
+
+## Lecture 37 - Building the About Section: Part 3
+
+* we will style images with animations. we create a new component in components _composition and we apply the BEM convention in naming. we use nesting with & to structure rules
+* we give them 55% width of the parent element (col)
+* we want them on top ofeach other. we use absolute positioning. when we set absolute they take reference with the paret with relative so we make the container relative position. they are stacked in top left corner . all zeroed.
+* we position them using the modifier classes.
+* TO MAKE IMAGES RESPONSIVE WE SET THEIR WIFDTH IN %!
+* we play with the z-index to make an animation efect of changing height
+* we want to add a boder at a distance from the element like a frame.
+
+* a trick to scale down siblings when hovering over an element is. beacuse events propagate when we hover a child the parent also gets thge pseudoclass hover. we take advantage to add at parent level (if we use css class nesting)
+
+```
+	&:hover &__photo:not(:hover) {
+		transform: scale(0.9);
+	}
+```
+
+* this means if the parent changes state to hover scale down all children (using BEM naming) that they are not hovered .
+
+## Lecture 38 - Building the Features Section
+
+* Leture objectives: Include and use  icon font,creating skewed section design, how and when to use the direct child 
+* we download icon fonts from linea.io. we extract fonts folder and styles.css in our css folder. we rename styles to icon-font and include it in our index.html. we get one class for each font
+* we use the icon with the i tag `<i class="icon-basic-world"></i>`
+* we create boxes for our content. we want to add animation to them. we never do transformations on the grid. we use boxes
+* our feature box will be a component so we use BEM
+* we style the section in _hove adding padding.
+* we insert a background image in section with: 
+
+````````
+	background-image: linear-gradient(
+		to right bottom, 
+		rgba($color-primary-light,0.8), 
+		rgba($color-primary-dark,0.8)
+	), url(../img/nat-4.jpg);
+	background-size: cover;
+````````
+
+* we extract as amixin grading linear text implementation from typography ad include it in icons.
+* we skew the section in _home but the skew affects also the childs (the boxes). we need to skew the boxes in the oposite direction. we dont do it in the component file because we want themto be reusable. we do it where we do the section skew in _home using the direct child selector *>* and the global selector (all children) ***.
+
+```
+	& > * {
+		transform: skewY(7deg);
+	}
+```
+
+* this method does not affect the classes per se but the html elements 
+
+## Lecture 39 - Building the Tours Section: Pt. 1
+
+* Lecture Objectives: build a rotating card, use *perspective* in CSS, use *backface-visibility* property, use background *blend* modes, how and when to use *box-decoration-break*
