@@ -594,3 +594,33 @@ becomes
 ## Lecture 39 - Building the Tours Section: Pt. 1
 
 * Lecture Objectives: build a rotating card, use *perspective* in CSS, use *backface-visibility* property, use background *blend* modes, how and when to use *box-decoration-break*
+* we make a new section and style it in _home. we copy paste the h1 block from section-about and copy paste our grid markup for 3 columps. we copy paste padding and background color from section-about and se the mardin to cover white spaces.
+* we make new component *card" and add its partial to main.scss
+* in the card we add when hovered trransform with rotation on Y axis for 180deg `transform: rotateY(180deg);` . we see that it doesn look right. we need perspective
+* perspective is defined on the parent element we want to rotate so we add it to card and the animation to a child ( a div with a BEM compatible element name). the rest of the styling is done in the childe element .card_side.
+* we bind the hover rule to the parent aplying it to the child. we could do the following 
+
+```
+&__side {
+	&:hover {
+		transform: rotateY(180deg);
+		background-color: $color-primary-light;
+	}
+}
+```
+
+* but we would have to rewrite the rule . with the following selector `&:hover &__side {}` inside the parent we can apply it to more children. the transition is still defined in the element the rule is applied `&__side {}`
+* to implement both sides of the rotating card we need 2 divs of card__side withan additional modiffing class *card__side--front* and back. this is to style the 2 sieds of the card.
+* the back card__side starts with transform: rotateY(180deg) and transitions to 0deg. we apply the transform on hover on both classes . and we see that they are one below the other. to stack them we use `position: absolute` (this has to do with the element div so we apply it to the common class card__side) and at the parent div (card) position: relative. absolute position makes the size 
+* relative to the content (text) so we give width relative to the parent 100%. we see that dimesions are right but on transition one hides the other so we add `backface_visibility: hidden;`
+* we see that there is no perspective. this is because parent lost its height. this is because it collapsed due to both children in position absolute. for floats we have clearfix. for this there is no clearfix. we need to five the parent aheight (the same heights as the children)
+* we remove back colors (they were for testing), to add colors separate for each card we need an extra modifirer in a new class card__side--front-1 (with class nesting its not that bad). we set the colors add  some shadow to the card__side and fit rotateY(-180) in hover to make it rotate in correct side
+
+## Lecture 40 - Building the Tours Section: Pt. 2
+
+* we start styling the front side of the card. we want 3 areas (div) for which we create 3 classes with element specialization (from BEM)
+* we work on the 1st area *card__image* which we add a background image. we give a one spave text. and we set the height. to add 3 different images on each card we add a modifier. we set the backgorund image as linear gradient and url for the image. to add a cool effect on the common class we add anew feat `background-blend-mode: screen;`. also we set the background-size to cover so that the image streches in all area
+* the card_side had border-radius. the image is squared and covers the rounded corner. to fix this we add to the parent element (card__side) overflow:hidden to cut the overflow.
+* we add clip-path to add the polygon effect of the header. (we can make it a mixin)
+* we style the second area *card__heading*. semanticaly it is a h4 so we change it from div to h4.
+* we want it over the image so we give it postion absolute and give it a distance from the borders. we style the text. as we want line breaks we add a span *card__heading-span* and a modiffier per card *--1* for the different colors.
