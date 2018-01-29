@@ -212,13 +212,12 @@ body {
     transform: translateY(-1.5rem) scale(1.03); }
 
 .card {
-  perspective: 100rem;
-  -moz-perspective: 100rem;
+  perspective: 150rem;
+  -moz-perspective: 150rem;
   position: relative;
-  height: 50rem; }
+  height: 52rem; }
   .card__side {
-    color: #fff;
-    height: 50rem;
+    height: 52rem;
     transition: all	.8s ease;
     font-size: 2rem;
     position: absolute;
@@ -252,9 +251,9 @@ body {
     .card__picture--1 {
       background-image: linear-gradient(to bottom right, #ffb900, #ff7730), url(../img/nat-5.jpg); }
     .card__picture--2 {
-      background-image: url(../img/nat-5.jpg); }
+      background-image: linear-gradient(to bottom right, #7ed56f, #28b485), url(../img/nat-6.jpg); }
     .card__picture--3 {
-      background-image: url(../img/nat-5.jpg); }
+      background-image: linear-gradient(to bottom right, #2998ff, #5643fa), url(../img/nat-7.jpg); }
   .card__heading {
     font-size: 2.8rem;
     font-weight: 300;
@@ -263,7 +262,109 @@ body {
     color: #fff;
     position: absolute;
     top: 12rem;
-    right: 2rem; }
+    right: 2rem;
+    width: 75%;
+    z-index: 1; }
+  .card__heading-span {
+    padding: 1rem 1.5rem;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone; }
+    .card__heading-span--1 {
+      background-image: linear-gradient(to right bottom, rgba(255, 185, 0, 0.85), rgba(255, 119, 48, 0.85)); }
+    .card__heading-span--2 {
+      background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.85), rgba(40, 180, 133, 0.85)); }
+    .card__heading-span--3 {
+      background-image: linear-gradient(to right bottom, rgba(41, 152, 255, 0.85), rgba(86, 67, 250, 0.85)); }
+  .card__details {
+    padding: 3rem; }
+    .card__details ul {
+      list-style: none;
+      width: 80%;
+      margin: 0 auto; }
+      .card__details ul li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem; }
+        .card__details ul li:not(:last-child) {
+          border-bottom: 1px solid #eee; }
+  .card__cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center; }
+  .card__price-box {
+    text-align: center;
+    margin-bottom: 8rem;
+    color: #fff; }
+  .card__price-only {
+    font-size: 1.4rem;
+    text-transform: uppercase; }
+  .card__price-value {
+    font-size: 6rem;
+    font-weight: 100; }
+
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  padding: 6rem;
+  font-size: 1.6rem;
+  padding-left: 9rem;
+  transform: skewX(-12deg); }
+  .story__shape {
+    width: 15rem;
+    height: 15rem;
+    float: left;
+    shape-outside: circle(50% at 50% 50%);
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50% at 50% 50%);
+    transform: translateX(-3rem) skewX(12deg);
+    position: relative;
+    overflow: hidden; }
+  .story__img {
+    height: 100%;
+    transform: translateX(-4rem) scale(1.4);
+    transition: all .5s;
+    backface-visibility: hidden; }
+  .story__text {
+    transform: skewX(12deg); }
+  .story__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    opacity: 0;
+    transition: all .5s;
+    backface-visibility: hidden; }
+  .story:hover .story__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%); }
+  .story:hover .story__img {
+    transform: translateX(-4rem) scale(1);
+    filter: blur(3px) brightness(80%); }
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: .15;
+  overflow: hidden; }
+  .bg-video__content {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
 
 .header {
   height: 95vh;
@@ -329,3 +430,21 @@ body {
   background-color: #f7f7f7;
   padding: 25rem 0 50rem 0;
   margin-top: -10rem; }
+
+.section-stories {
+  padding: 15rem 0;
+  position: relative; }
+
+.section-book {
+  padding: 15rem 0;
+  background-image: linear-gradient(to right bottom, #7ed56f, #28b485); }
+
+.book {
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../img/nat-10.jpg);
+  background-size: 100%;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+  height: 50rem; }
+  .book__form {
+    width: 50%;
+    padding: 6rem; }

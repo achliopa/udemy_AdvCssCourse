@@ -534,15 +534,9 @@ becomes
 * we want to use the grid to position elements so we copy paste blocks from our test markup. styling is already there and tested
 * we need spacing after the secondary heading BUT we want it resusable and in other uses the margin requirements are digfferent
 * to solve it we use a utility class!
-
-## Lecture 36 - Building the About Section: Part 2
-
 * we add h3 and paragraph and style it with typography and utility classes. we use psedoclasses and elector interpolatiuon with &. nothing new
 * we start bulding a new buttona as an anchor. we style in _buttons.
 * padding and borders for small buttons is better to be in px not rem.
-
-## Lecture 37 - Building the About Section: Part 3
-
 * we will style images with animations. we create a new component in components _composition and we apply the BEM convention in naming. we use nesting with & to structure rules
 * we give them 55% width of the parent element (col)
 * we want them on top ofeach other. we use absolute positioning. when we set absolute they take reference with the paret with relative so we make the container relative position. they are stacked in top left corner . all zeroed.
@@ -615,12 +609,51 @@ becomes
 * relative to the content (text) so we give width relative to the parent 100%. we see that dimesions are right but on transition one hides the other so we add `backface_visibility: hidden;`
 * we see that there is no perspective. this is because parent lost its height. this is because it collapsed due to both children in position absolute. for floats we have clearfix. for this there is no clearfix. we need to five the parent aheight (the same heights as the children)
 * we remove back colors (they were for testing), to add colors separate for each card we need an extra modifirer in a new class card__side--front-1 (with class nesting its not that bad). we set the colors add  some shadow to the card__side and fit rotateY(-180) in hover to make it rotate in correct side
-
-## Lecture 40 - Building the Tours Section: Pt. 2
-
 * we start styling the front side of the card. we want 3 areas (div) for which we create 3 classes with element specialization (from BEM)
 * we work on the 1st area *card__image* which we add a background image. we give a one spave text. and we set the height. to add 3 different images on each card we add a modifier. we set the backgorund image as linear gradient and url for the image. to add a cool effect on the common class we add anew feat `background-blend-mode: screen;`. also we set the background-size to cover so that the image streches in all area
 * the card_side had border-radius. the image is squared and covers the rounded corner. to fix this we add to the parent element (card__side) overflow:hidden to cut the overflow.
 * we add clip-path to add the polygon effect of the header. (we can make it a mixin)
 * we style the second area *card__heading*. semanticaly it is a h4 so we change it from div to h4.
-* we want it over the image so we give it postion absolute and give it a distance from the borders. we style the text. as we want line breaks we add a span *card__heading-span* and a modiffier per card *--1* for the different colors.
+* we want it over the image so we give it postion absolute and give it a distance from the borders. we style the text. 
+* as we want line breaks and gradient on each line we want to use the css property box-decoration-break. to use it we add a span *card__heading-span* and a modiffier per card *--1* for the different colors.
+* we set the width in the heading and add padding to limit the size and enforce the line break. we add background-mage a linear gradient and use vox-decoration-brak in the spa to efore the rule to all boxes in teh the same selector (2 lines of text)
+* in card details we make a ul list. we style it and positioon it with relative vaues. to center a box element in a box element we use `margin: 0 auto`
+* we have to style the back of the card. it has only a white button which we have already as a component and some text. we create a div container under name *card__cta* and position it absolute and center it with the method we used in header
+* button adapts to the width of the cta and has awkward small width because cta has no width , takes it from the element is contains (text). we give it a width
+
+## Lecture 42 - Building the stories section. Pt.1
+
+* Lecture objectives: how to make text flow around shapes with *shape-outside* and *float*, How to apply a *filter* to images,How to create a backround video covering an entire section, how to use the *<video>* HTML element, how and when to use the *object-fit* property
+* we create anew section with a h2 heading and a story class div. the h2 we cp from another section. the section we add to our _home partial and do basic styling. for the *story* class we make a new component file named *_story.scss*
+* we want to place a round image on teh left and an h3 and a paragraph on the right with text wrapping around the image. we start by adding a *figure* (semanticaly an image with caption) with class *story__shape*
+* the figure is given fixed dimensions and positioned in a float . this enables us to use the *shape-outside* property to shape everything around it in a wrap by giving the vector (a circle). to use it we shape the figure by clipingit to a circle. again by a circle. the circle in css is defined by its radius and center. as we use absolute dimensions we can define them relative at 50% `shape-outside: circle(50% at 50% 50%);` to move the clipped figure to the left to create distance we dont use padding or margin. we never use these on modified elements . we use trsform: translatX or Y. the image is given a heiogth of 100% . if we used width it would not show correclty. 
+* to skew the whole story we use skewX . but we cannot reverse skew the content by applying `& > * { transform: SkewX();}` as CSS dooes not inherit a second transformation in an already trasfomed element. we do this in each child adding the trasform.
+* we will add blur effect and zoom out tot he image and fade in to the text on the image
+* there is a special html element *figcaption* for image captions
+* we givi it absolute positioning and we center it using the header technique. we add to the parent postion: relative to work. we style the text  and we traslate the text down on the Y axis giving an opacity of 0. 
+* we add a hover rule to the parent element applying to children the *story_img* and *story_caption*. in caption hover we add opacity one and transform of tralslating the postion to the original (-50% -50%) to the center of the shape. to the img at normal state we scale it and move it left abit with translate tot center the woman. 
+* in image hover we add two *filter* blur by 3px and brightness of 80%.
+* we add transitions to the img and caption.
+* to solve transition glitch we add backface-visibility hiden to image and caption and overflow: hidden to the parent element
+* to add a video we add a container div abocve the h2 heading which we name bg-video and make it a component. we insert in it a hetml5 video element which wraps its source which are two format of the video .
+
+```
+<video class="bg-video__content" autoplay muted loop>
+                        <source src="img/video.mp4" type="video/mp4">
+                        <source src="img/video.webm" type="video/webm">
+                        Your browser is not supported!
+                    </video>
+```
+* the video attributes are for playback options
+* we position the container with absolute position on top left corenrgiving a width and height of 100%. we put it behind with zindex and make it fade with low opacity.
+* we give the parent class a position relative required to work with absolute positioning o the child
+* the video per se bg-video__content we give it width and height of 100% and we ask it to cover the parent (like background-size: cover) with `object-fit:cover;`, this creates overflow which we tackle with overflow: hidden on the parent container.
+
+## Lecture 45 - Building the Booking Section. Pt.1
+
+* Lecture objectives: how to implement *solid-color-gradients*, how the general and adjacent sibling selectors work and why we need them, how to use the ::input-placeholder pseudo element, how and when to use the : focus, :invalid,  pseudoholder-shown and :checked pseudoclasses, techniques to build custom radio buttons
+* we create a new section and a container for styling the background of our form. we consider it page specific so all of these go to _home partial
+* the reusable part will be the form styling which will go to a separate partial.
+* the pabground of the container *book* class is an image which we overlay with a linera gradient. we take advantage of two feats of the gradient. instead of tobottom and such we use *105deg* angle for finer control on direction. also we can add multiple stops on gradient by addint the percentage after the color. we use .9 opacity in rgba in 0% and 50% and we add one more stop of transparent at 50% to clear out. 
+* background-size of 100% is the same as cover. 
+* our book_form container class ofr the form takes 50% of the background image and has padding. in the container we add a form html tag of class form. in it we add two form_group classes for input label pairs and a reused div with h2 heading reused from assection
