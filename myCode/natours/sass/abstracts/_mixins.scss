@@ -1,0 +1,14 @@
+@mixin clearfix {
+	&::after {
+		content: "";
+		clear: both; // works for float left or right
+		display: table;
+	}
+}
+
+@mixin linear-gradient-text {
+	display: inline-block;
+	background: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+	-webkit-background-clip: text;
+	color: transparent;
+}
