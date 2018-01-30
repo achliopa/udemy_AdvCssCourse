@@ -444,6 +444,7 @@ becomes
 		color: red;
 	}
 }
+```
 
 ## Lecture 32: Implementing the 7-! Architecture with Sass
 
