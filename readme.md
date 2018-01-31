@@ -661,3 +661,30 @@ becomes
 * we start styling the input we add the :focus pseudoclass to alter the apearance when clicked. we use the html input type to apply html5 validation using the :invalid pseudoclass to alter the borderbottom color when clicked and still invalid. to avoid move aup or down when notn click we add a transparent border line in normal state of input
 * we style the label and we add an animation to make it disapear when placeholder is visible and make it appear when we have written something. we use the rule on input:placeholder-shown pseudoclass but we write it one level up to apply it to a different element. because label is a sibling (the next sibling) we use *+* and the element class. if it was just a sibling (not next in html) we would use *~*. this works because the label is after the input .if it was before in the html tree it would not work. to make it disapear we use visibility: hidden but to control the animation with transition we use opacity because this can be added to transition.
 * some attributes like color are not inherited by default. to make them inheritable we use *inherit*
+* we add anew form group for radio buttons. in it we add a container for each input + label pair. we give both radio inputs the same name to pair them (mutual exclusive)
+* we want to style our own radio buttons. to do this we add a span in the label and we will hide the input
+* we style form__radio-button span as a inline block element with specific height and width and border and border radius to look as a circle rim. we give it absolute position so parent element radio-label is relative.
+* we create a pseudoelement::after to look as a circle and position it in the center of the main elelment circle rim. we default it to opacity 0. 
+* we want to bind the transition of opacity to the actual radio-button. so we use selector `&__radio-input:checked ~ &__radio-label &__radio-button::after` using the checked pseudoclass of radioinput to get the state and apply it to the pseudoellemnt of span using the sibling selector and cascade.
+* we hide the checkbox with display: none
+* we add a button eleemnt and add the btn class to it. it is nt styled as in _button our selector was using pseudoclasses from the anchor tag not the button we add plain selector to the rule, we add focus to the active pseusodclass rule and we add a margin bottom utility to the form group above
+* the rule is not applied as it is overwritten. to solve it we add !important to all utilities
+
+## Lecture 48 - Building the Footer
+
+* nothing new here
+* to apply trasform the element must be block (inline-block or just block)
+* inline-block takes the width of its content
+* we use html semantic footer tag and a class which we style in layouts in a partial file
+
+## Lecture 49 - Building the Navbigation Pt.1
+
+* Lecture objectives: what the *checkbox hack* is and how it works, how to create custom aimation timing functions using cubic bezier curves, how to animate solid-color gradients, how and why to use *transform-origin*, in general create an amazing creative effect
+* to do the button click reaveal navigation effect we will do a similar hack like in radio button but with checkbox. we will use the checkbox pseudoclass to capture the click but the checkbox will be invisible. what will be  visible and styled will be its label where the animations will be applied
+* we will add a navigation div block over the header in html. in there we put a checkbox input a label adiv for background and a nav element with the list of links
+* we style navigation in a layout partial of the same name
+* we start from the background div. we give it a fix height and width, we make it round and we set position:fixed. this is like absolute but it doesnt change postiion when scaled or when page scrolls and alsothe iteme is taken out of the flow
+* we make the same styling to the button but we give it a bigger size and higher z-index to cover the background.
+* to make the background cover up we scale it by 80 times.  this with transform and binded to the hiodden checkbox will create the animation to present the nav
+* the nav we make it fullscreen with vh without background and give it a high z-index.
+* the links are given a background image of linear gradient with angle and stops. to crete the animation we change the background position
