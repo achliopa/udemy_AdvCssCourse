@@ -688,3 +688,18 @@ becomes
 * to make the background cover up we scale it by 80 times.  this with transform and binded to the hiodden checkbox will create the animation to present the nav
 * the nav we make it fullscreen with vh without background and give it a high z-index.
 * the links are given a background image of linear gradient with angle and stops. to crete the animation we change the background position
+* to apply the animation when button is pressed we hide the background by removin gthe scale in default and hide navigation by setting nav to opacity: 0, as the cursor is still responding to nave even when hidden we add width: 0
+* now we bind to checkbox checked pseudoclass applying it to a sibling. we use general sibling background and nav in separate rules to set the animation. 
+* we see that navigation animation is wierd. we add width 100% to the list to fix that because when parend element loses its width the child (list sticks to right) we gan add background to nav to see it
+* we will use custom timing function in our animation *cubic-bezier()*. there are online tools to work that easings.net. we see that playing with width in nav makes a nice transition
+* the button icon effect will be fully custom. we hve three lines that are transformed into an X. the thre lines will be an element (middle) a pseudoelement :before (up) and :after (below)
+* to make the icon we add a span in teh label (button class). we style the elemt and the 2 pseudoelements as small boxes . to make the pseudoelements appear we give them empty striung content. we make them inline-blocks to style them. location is wrong. we give them absolute positioninhg
+* we bind to the checkbox checked pseudoclass. we dont change its width becaus ethis will affect the pseudoelements. we make it transparent
+* transform-origin shows where the transformation happens. the point of reference. defualt is in the middle. right takes the right end.
+
+## Lecture 52 - Building a Pure CSS Popup - Pt.1
+
+* Lecture Objectives: how to build a nice popup with only CSS, how to use the *:target* pseudo-class, how to create boxes with equal height using *display: table-cell;* how to create CSS text columns, how to automatically hyphenate  words using *hyphens*
+
+* we trigger the popup from reverse cards buttons
+* we ban put the popup anyweere in the markup
