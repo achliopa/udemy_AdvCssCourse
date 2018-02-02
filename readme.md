@@ -702,4 +702,10 @@ becomes
 * Lecture Objectives: how to build a nice popup with only CSS, how to use the *:target* pseudo-class, how to create boxes with equal height using *display: table-cell;* how to create CSS text columns, how to automatically hyphenate  words using *hyphens*
 
 * we trigger the popup from reverse cards buttons
-* we ban put the popup anyweere in the markup
+* we can put the popup anywhere in the markup
+* when i say display:none to hide elements i cannot animate, i use opacity: 0 and visibility: hidden.
+* anchor tags href can point to html ids using #idName
+* when we want float right and left but the blocks have not the same diensions and we want alignement we prefer to display them as table-cells usw vertical-align and their parent to be set at display: table
+* latest css allows columns to text with column-count (num of columns) column-gap and column-rule (border line vertical). also it allows `hyphens:auto;` but this requires our language to be set at html doc.
+* a nice way to trigger animations with anchor tags is to ad an id to the element se this id to the href of the anchor. when clicked the tagret of the click event becomes the elemnt that has the id. we can use the &:target pseudoclass on the element (or its class) to style a transition when the anchor is clicked .e.g. change visivbility
+* we cannot stack transforms. if we cannot put them all together because e.g of mixins we repeat the transforms of the e.g mixin in our secont transform
