@@ -709,3 +709,91 @@ becomes
 * latest css allows columns to text with column-count (num of columns) column-gap and column-rule (border line vertical). also it allows `hyphens:auto;` but this requires our language to be set at html doc.
 * a nice way to trigger animations with anchor tags is to ad an id to the element se this id to the href of the anchor. when clicked the tagret of the click event becomes the elemnt that has the id. we can use the &:target pseudoclass on the element (or its class) to style a transition when the anchor is clicked .e.g. change visivbility
 * we cannot stack transforms. if we cannot put them all together because e.g of mixins we repeat the transforms of the e.g mixin in our secont transform
+
+# Section 6 - Natours Project - Advanced Responsive Desing (Part 3)
+
+## Lecture 54 -  Mobile-First vs Desktop First and Breakpoints
+
+* Desktop First: Design for large screens -> then use media queries with max-width to adapt to smaller screens
+* Mobile first: Design for mobile -> use media queries with min-width to adaptt to larger screens. enforces simplicity
+* Media query : `@media(min-width: 500px) {}`
+* typical breakpoints 0 - 600px - 900px -1200px - infinity
+* media queries typically overlap  max-width: 900px overlaps 600px. CSS rules apply so typically we  write most specifuc rule last.
+* MObile First: pros: 100% optimized for mobile, reduces website and app to the absolute essentials, result in smallerm faster more efficient products, content first. cons: desktop version empty and simplistic, difficult to develop,  less creative  frredom, clients want to see desktop version as prototype
+* Think about if users use mobile, whats the purpose of the website
+* Breakpoints: BAD APPROACH: using width of popular devices as breakpoints (usually Apple Products) GOOD APPROACH: find all popular devices of similar type and group them. place breakpoints among groups PERFECT APPROACH: ignore devices. put breakpoints where design breaks
+
+## Lecture 56 - Use the Power of Sass Mixins to Write Media Queries
+
+* Lecture Objectives: how to use a powerful sass mixing to write all our media queries, how to use the `@content` and `@if` sass directives, taking advantage of chrome devtools for responsive design.
+* in the past the norm was to make a css file with media queries putin all rules per media query together.
+* with sass we can put media queries in our selecor.
+* it is still nonproductive to write the same media query in multiple rules. therefore we use mixins
+* the approach is the following: in our _base partial we add a mixin 
+
+```
+@mixin respond-phone {
+	@media (max-width: 600px) { @content };
+}
+```
+
+* we use it in our rules like
+
+```
+@include respond-phone {
+	font-size: 50%;
+}
+
+* @content is the css properties or code we wrap in include. we can use the ability of mixins to accept variables as parameters to parametrize the mixin calls
+writing a media manager for all queries
+
+```
+@mixin respond($breakpoint) {
+	@if $breakpoint == phone {
+		@media (max-width: 600px) { @content };
+	}
+	@if $breakpoint == tab-port {
+		@media (max-width: 900px) { @content };
+	}
+}
+```
+
+* and call it in our css with:
+
+```
+@include respond(phone) {
+	font-size: 50%;
+}
+```
+
+* we avoid using pizels in mdeia queries. em s and rem s in media queries are not affected by font-size we define but by the fontsize coming from the browser (16px)
+we use ems as rems does not work in all browsers
+
+* smaller query must go last. larger media queries first.
+* we apply media queries in rem definition first. affecting all the design
+
+## Lecture 57 - Writing Media Queries - Base, Typography and Layout
+
+* we will get rid of white border as small screen
+* we change typography sizes
+* we follow with grid. the common change is to change col width to 100%
+* we change margins
+* we change bottom margin as stacked columns need space between
+* also we have to decrease max width
+* we go to header . we have to adapt clip path msking it smoother
+* also in navigation the button size
+
+* we see a white bar on the right when we decrease the width too much.
+* we go to footer. we need to center everything when columns are stacked
+
+## Lecture 58 - Writing Media Queries - Layout - About and Features Sections
+
+* we see that we have too much padding in our layout. in home partial we reduce padding from sections
+* we go now to components starting with composition
+* we give images relative position floatrthem left and reduce their width. also we change positioning of indiuvidual pictures
+
+## Lecture 59 - Writing Media Queries - Tours, Stories and Booking Sections
+
+* we have to change the tour section. we have to hover over the card to flip and on mobile we have touch events. so we choose to skip the flip part and make all info apear on the front side. wthis is major refactoriung. actually whole component get rewriten. removing transitions , positioning shadows and sizes.
+* in story component we make it square with width 100%. lower than 600 we have issue so we remove skew
+* we go to booking section at home we increase form width , background-size (100% covers on x axis)
