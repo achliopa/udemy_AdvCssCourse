@@ -860,3 +860,66 @@ we use ems as rems does not work in all browsers
 * Lecture objectives: how to implement responsive images with CSS, how to use resolution media queries to target high-resolution screens with 2x, how to combine multiple conditions in media queries
 * we will target header background image. we have one additional hero-small.jpg image with width 1000px. original is 2000px.
 * we write a rule with media queries targeting resolution to use a better quality image for higher density screens `@media (min-resolution: 192dpi) {}`. we can combine media queries `@media (min-resolution: 192dpi) and (min-width: 600px)` or condition is applied with a comma and the second media query condition
+
+## Lecture 64 - Testing for browser support with @supports
+
+* Lecture objectives: how to use *@supports* feature queries, implement graceful degradation on selected properties, how to use the *backdrop-filter*
+* backdrop-filter: blur(10px); (background blur) does not work in chrome only in safari
+* the approach is to query and then apply
+
+```
+	@supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		background-color: rgba($color-black, .3);
+	}
+```
+
+* safari does not support media queries to resolution we add `(-webkit-min-device-pixel-ratio: 2)` which is supported
+* cli-path does not work in safari
+
+## Lecture 65 - Setting Up a simple build process using the NPM scripts
+
+* main.sass -> [compilation] -> style.comp.css ->[concatenation]-> style.concat.css + icon-font.css->[prefixing]->style.prefix.css->[compressing]->style.css 
+* production.code
+* we will do all these in package.json.
+	* first we change compile: sass name to watch:sass
+	* we add "compile:sass": "node-sass sass/main.scss css/style.comp.css"
+	* we install concat npm install concat --save-dev
+	* we add "concat:css": "concat -o css/style.concat.css css/icon-font.css css/style.comp.css",
+	* we install npm install autoprefixer --save-dev
+	* we install  npm install postcss-cli --save-dev
+	* we add "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' css/style.concat.css -o css/style.prefix.css"
+	* we install npm install npm-run-all --save-dev
+	* we add a script "build:css": "npm-run-all compile:sass concat:css prefix:css compress:css"
+	* we run npm run build:css
+	* we add
+
+```
+    "devserver": "live-server",
+    "watch:sass": "node-sass sass/main.scss css/style.css -w",
+    "start": "npm-run-all --parallel devserver watch:sass",
+```
+
+## Lecture 66 - Wrapping Up. Final Touches
+
+* highlight selected text. add this to base partial
+
+```
+::selection {
+	background-color: rgba($color-primary, .5);
+	color: $color-white;
+}
+```
+
+* apply media queries only to screens (e.g. not in printouts) `@media only screen and (min-width: 112.5em) `
+* we have to make sure our html has in its header the tag ` <meta name="viewport" content="width=device-width, initial-scale=1.0">` otherwise responsive design wont work
+* our cards change style (no hover) in narrow screens. but in tabs in landscape we see the flip cards even we are on device. in css we can have media query to know if we can hover or not and style accordingly
+* we cannot add to the media query in card parial becaus4 it is a mixin so we write it from start
+
+```
+@media only screen and (max-width: 56.25em),
+		only screen and (hover: none) {}
+```
+* if we want to implement the navigation (close the navigation and point to the section) we need to write javascript. we cannot do this with css alone
+* to close th popup when clicking outside the box we need to use javascript
