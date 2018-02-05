@@ -459,7 +459,6 @@ becomes
 	* pages: if he have specific styles for a specific page , we create a file for the specific page with its name (_home.scss)
 	* themes: in case we do a webapp with different themes
 	* vendor: 3rd party css from e.g bootstrap
-
 * we import all the partials we created in main.scss
 * we restart the script compile:sass (it breaks when we create files)
 * we cut paste color variables in _variables.scss
@@ -467,7 +466,6 @@ becomes
 * @keyframe animations are cut paste in _animations.scss
 * .btn can become a component a building block that we can reuse so we create a file _button.scss in compoennts and cut paste .btn {}
 * .header can be used as a layout (global layout) or as a component. we choose to consider it global and create file _header.scss in layouts where we cut paste the rule.
-
 * .heading-primary we consider it typography so we place it in the respective file. it could be used as a component (questionalble)
 * we note that in many places we have typography stuff in rules. we should place them in _typography as well
 
@@ -797,3 +795,68 @@ we use ems as rems does not work in all browsers
 * we have to change the tour section. we have to hover over the card to flip and on mobile we have touch events. so we choose to skip the flip part and make all info apear on the front side. wthis is major refactoriung. actually whole component get rewriten. removing transitions , positioning shadows and sizes.
 * in story component we make it square with width 100%. lower than 600 we have issue so we remove skew
 * we go to booking section at home we increase form width , background-size (100% covers on x axis)
+
+## Lecture 60 - An Overview of Responsive Images
+
+* we have responsive images with vh sizes. but we are not there yet
+* Responsive images mean: serve the right image to the right screen size and device , avoid downloading large images to small screens
+* 3 use cases for responsive images: 
+	* Resolution switcching. Large Screen -> Small screen (decrease image resolution on smaller screen)
+	* Density Switching: @2x screen (high res) ->  @1x screen (low res) *H=aft the image resolution on @1x screen (pixel density)
+	* Art direction: large screen -> small screen (different image on smaller screen)
+
+## Lecture 61 - Responsive Images in HTML - Art Direction and Density Switching
+
+* Lecture Objectives: How to use the *srcset* attribute on the *<img>* and *<source>* elements, together with density descriptions, how and why to use the *<picture>* element for art direction, how to write media queries in html
+* in images in html we need the img tag of html (not background css image)
+* we will do art direction and desity switching in footer logo
+* we need 2 images for art direction
+
+```
+<img src="img/logo-green-2x.png" alt="Full logo" class="footer__logo">
+```
+
+* becomes the code below in density switching where we choose between 2 images on density 1x and 2x. using srcset instead of src
+
+```
+<img srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" alt="Full logo" class="footer__logo">
+```
+
+* for art direction we use picture. it wraps source to apply a media query . when this is true we show the img in src. when it is false we show the follwoung img tag. we can combine it with desity switching like in the example
+
+```
+<picture class="footer__logo">
+    <source srcset="img/logo-green-small-1x.png 1x, img/logo-green-small-2x.png 2x" media=(max-width: 37.5rem)">
+    <img srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" alt="Full logo">
+</picture>
+```
+
+## Lecture 62 - Responsive Images in HTML - Density and Resolution Switching
+
+* Lecture objectives: how to allow the browser to decide the best image to download, using the *srcset* attribute, width descriptors ante *sizes* attribute of the <img> element
+* in chrome dev tools top right cornet we can adjust our pixel ration to test low res.
+* we will apply the technique to the about section images
+* we have two versions (1 with 1000px width and one with 300px width)
+
+```
+<img src="img/nat-1-large.jpg" alt="Photo 1" class="composition__photo composition__photo--p1">
+```
+
+* becomes
+
+```
+<img srcset="img/nat-1.jpg 300w, img/nat-1-large.jpg 1000w" 
+     sizes="(max-widthL 900px) 20vw, (max-width: 600px) 30vw, 300px"
+     alt="Photo 1"
+     class="composition__photo composition__photo--p1"
+     src="img/nat-1-large.jpg"
+>
+```
+
+* there we apply res switching using the srcset instead of pixel density we give the actual width of the 2 images in pixels and in size we inform the browser of the breakpoints with max0width and the percentage of the image in vw for each breakpoint. we keep src for leagcy. browser will decide which to use to optimize performance. the browser will use the picture we specify in the breakpoint
+
+## Lecture 63 - Responsive Images in CSS
+
+* Lecture objectives: how to implement responsive images with CSS, how to use resolution media queries to target high-resolution screens with 2x, how to combine multiple conditions in media queries
+* we will target header background image. we have one additional hero-small.jpg image with width 1000px. original is 2000px.
+* we write a rule with media queries targeting resolution to use a better quality image for higher density screens `@media (min-resolution: 192dpi) {}`. we can combine media queries `@media (min-resolution: 192dpi) and (min-width: 600px)` or condition is applied with a comma and the second media query condition
