@@ -986,8 +986,28 @@ we use ems as rems does not work in all browsers
 ## Lecture 73 - Defining Project Settings and Custom Props
 
 * lecture obj: how and why to use css custom props
-* architecture: he w
+* architecture: he wont follow 7 . 1 pattern. the project will be simple to focus on flexbox
+* we add 3 scss files in sass. the partials _layout, _base and _component
+* we start from base adding box-sizing to html rule and all elemets with * .
+* we do initialization of styles in base and we want to set colors. we will not use sass variables like in last project. we will use css custom properties (css variables)
+* with css we dont need preprosessor. we can manipulate them in javascript and we can edit them in dev tools
+* css variables must be declared in a declaration box. like the global declaration block (*)
+* css vars are available in the scope of the declaration they are defined and its children
+* an easy place to gather them all is the root pseudoclass (:root)
+* we define them with -- `--color-primary: #eb2f64;` we use them with var() `color: var(--color-primary);`
+* we use linear-gradient as background image. we set background-size cover. it wraps the content (text) and repeats. we remove repetition with background-repeat: no-repeat.
+* to stretch it in all screen we add height: 100vh; to accomodate larger screens . we add min-height: 100vh;
 
+## Lecture 74 - Building the overall Layout
 
+* Lecture obj: how to think about the overall layout in the app, use flexbox in a real-world project for the first time
+* we have a huge container. on top it has a header with anavbar. under it on left a sidebar and on right the hotel view
+* we add major layout eleemnts in our markup, give them classes and style them in the layout partial. (container, header,content, sidebar, hotel-view
+* we style the container with max-width auto margins)
+* we style the header with fix height 
+* content class will be our flex container so we add property `display: flex;`
+* we give the sidebar a fixed width 18% with no grow or shrink `flex: 0 0 18%;`
+* we give the hotel-view the ability to shrink or grow and take as much space it can with `flex: 1;`
+* we have to stretch in the cross axis
 
 
