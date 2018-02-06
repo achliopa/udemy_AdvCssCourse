@@ -923,3 +923,71 @@ we use ems as rems does not work in all browsers
 ```
 * if we want to implement the navigation (close the navigation and point to the section) we need to write javascript. we cannot do this with css alone
 * to close th popup when clicking outside the box we need to use javascript
+
+# Section 7 - Master Flexbox
+
+## Lecture 68 - Flexbox Overview
+
+* What is: Flexbox is a new module in CSS3 that makes it easy to align elements to one another, in different directions and orders
+	* the main idea behind flexbox is to give the container the ability to expand and to shrink elements to best use all the available space
+	* flexbox replaces float layouts, using less and more readable logical code
+	* it completeley changes the way we build one dimensional layouts
+	* it is a true revolution in CS
+* the element on which we use flex is called flex container. in this we add property `display: flex;` to behaves like an inline element (display: flex-inline) but rarely used as such
+* all the children elements on which flex is applied are called flex items.
+* the direction on xhich these elements are laid out is called main axis. the other perpenticular axis is called the cross axis
+* we can select the direction of the main axis
+* Main Flex Container Properties:
+	* `flex-direction: row | row-reverse | column | column-reverse` selects the main axis direction
+	* `flex-wrap: nowrap | wrap | wrap-reverse` determines if the items should wrap if there is not enough space in the main axis
+	* `justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly` specifies how items are aligned in the main axis
+	* `align-items: stretch | flex-start | flex-end | center | baseline` specifies how items are aligned in the cross axis
+	* `align-content: stretch | flex-start | flex-end | center | space-between | space-around` this prop applies when there are more than one rows of items and specifies how the rows of items will be aligned along the cross axis
+* Main FLex Item Properties:
+	* `align-self: auto | stretch | flex-start | flex-end | center | baseline` specifies the alignment of a specific item on the  cross axis. it overrides the flex container align for this item
+	* `order: 0 | <integer>` manual set order of item
+	* `flex-grow: 0 | <integer>` let flex decide on the width of the item (how mucxh it will grow)
+	* `flex-shrink: 1 | <integer>` let flex decide on the width of the item (how mucxh it will shrink)
+	* `flex-basis: auto |<length>`  let flex decide on the items base width
+	* the last 3 properties are grouped together with flex: 0 1 auto | <int> <int> <length>
+
+## Lecture 69 - Basic Intro to Flexbox - Flex Container
+
+* Defaults: `flex-direction: row; justify-content: flex-start; align-items: stretch`
+* justify content doesnt do anything for space between items. it is defined by the margin we define on the item and the container padding, only when we define space- we overwrite them. -betwwen distributes evenly space only between items -evenly around items (start end). and -around (gives 2x between and x in star and stop)
+* align items aligne them in cross axis. strech stretches all to match the bigger height , center start and end are obvious. baseline aligns the text baseline in the items
+
+## Lecture 70 - Basic Intro to Flexbox - Flex Items
+
+* align self ovewrites aling-items for this item
+* to put an item in the beginning i put order to -soemething. or lower than the others. flex orders by order number lower to higher. default is `order: 0;`
+* by `flex-grow: 1;` items expand to occupy as much space as they can. the number is proportinal to the other items number. e.g if one has flex-grow: 1 and the other flex-grow: 2 the second is double the size in both dimensions than the other. flex-grow: 1 is the same as flex: 1 
+* if we give flex:1 to one item and the other none then this one item stretches and the others no.
+* flex-basis sets the width of the item. if we give e,g 20% it ocupies 20% of the available space. 100% is same as flex: 1 but in width axis . flex-basis wins over flex. 
+* even if we fix the flex-basis to a set width in px when there is no available space it will shrink accordingly
+* flex-shrink determines the items ability to shrink. default is flex-shrink: 1 meaning that the item can shrink. if we set it to 0 the item is not allowed to shrink
+* flex: 0 means we dont want the item to grow. flex: 0 0 300px; means the item cannot grow or shrink and its width is 300px
+
+## Lecture 71 - Basic Intro to Flexbox - Adding More Flex Items
+
+* flex-wrap default value is no-wrap. wrap is adding a new line for the items that do not fit (without shrinking them?!?)
+* the distance between rows is controled by aling-content: (defualt value of stretch which stretches the row height).
+
+## Lecture 72 - Project Overview
+
+* trillo. all in one booking app wireframe. flexbox + svg + animations
+* we cp starter code from github
+* we have a boilerplate project with sass and package.json ready with scripts
+* we npm install dependencies
+* modify our package.json
+* run npm start
+* we test that all dev flow works ok.
+
+## Lecture 73 - Defining Project Settings and Custom Props
+
+* lecture obj: how and why to use css custom props
+* architecture: he w
+
+
+
+
