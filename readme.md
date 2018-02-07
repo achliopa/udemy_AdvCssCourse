@@ -1010,4 +1010,9 @@ we use ems as rems does not work in all browsers
 * we give the hotel-view the ability to shrink or grow and take as much space it can with `flex: 1;`
 * we have to stretch in the cross axis
 
+## Lecture 75 - Building the Header Pt.1
+
+* Lecture objectives: why to use SVG icons vs font icons, how to find generate and use svg sprites in html, how to change the color of an SVG icon in CSS, how to use more advanced flexbox alignment techniques including justify-content, align-items, align-self and flex
+* its a hack displaying icons that are images using fonts
+* screen readers try to read icon fonts
 
