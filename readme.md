@@ -1013,6 +1013,33 @@ we use ems as rems does not work in all browsers
 ## Lecture 75 - Building the Header Pt.1
 
 * Lecture objectives: why to use SVG icons vs font icons, how to find generate and use svg sprites in html, how to change the color of an SVG icon in CSS, how to use more advanced flexbox alignment techniques including justify-content, align-items, align-self and flex
+* we add markup in header
 * its a hack displaying icons that are images using fonts
 * screen readers try to read icon fonts
+* icomoon.io lets you upload an idon and make it svg or add an icon from a library
+* he choses entypo+
+* we generate a folder with 10 svg files for each icon and a general file symbol-defs.svg that contains all defs. we rename it as sprite.svg. we use it to have a single file to import in our html
+* we import it using:
 
+```
+<svg class="search__icon">
+    <use href="img/sprite.svg#icon-magnifying-glass"></use>
+</svg>
+```
+
+* href works with a webserver
+* we add a nav element with boxes to show icons on navbar
+* to add notification like elements on icon we use span and a class (using the BEM naming convention)
+* we style the header in components partial wher all BEM class hierarchies are styled
+* svgs are styled like html elemetns when icon fonts are styled as text
+* we use flexbox to put element side-by-side in the header so we use `display:flex;`
+* we aligne item with justifycontent space-between
+* we give a width to the search item using `flex: 0 0 40%;`
+* we palce the search button on the input giving the input negative margin
+* we center all items in search element using flex
+* a flex item can become flex container
+* we can change an svg color in css with *fill:*
+* we use flexbox to align user-nav elements
+* we use *&> ** selector to select all direct children
+* we strtch all children using height:L 100% and the use flexbox to align the content of user-nav boxes
+* we can use flex to align text as well
