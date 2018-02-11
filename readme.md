@@ -1043,3 +1043,44 @@ we use ems as rems does not work in all browsers
 * we use *&> ** selector to select all direct children
 * we strtch all children using height:L 100% and the use flexbox to align the content of user-nav boxes
 * we can use flex to align text as well
+
+## Lecture 78 - Building the Navigation Pt.1
+
+* Lercture Objectives: how to use scaleY and multiple transition properties with different settings, to create a creative hover effect, how and why to use the currentColor CSS variable, how to use some more advanced flexbox alignement techniques, including flex-direction, justify-content and align-items
+* we add a ul with li items and a copyright text
+* we give a large height to hotel-view to see the actual size of the navbar
+* we change the direction of flex in sidebar and we apply flexbox on the container
+* we use justify-content : space-between to push legal text to the bottom
+* currentColor css variable is the color of the parent element or the current element
+* we use flexbox to align list items
+* in order to add the hover efect like a progress bar we add a before pseudoelement which will appear on hover
+* transition can apply to more than 1 attributes
+* to use z-index the element must have specified position
+* using scaleY or X as transform attribute start the animation from center if we want an other point we can add trasform-origin
+
+## Lecture 80 - Hotel Overview Pt.1
+
+* how to create an infinite animation, how to use margin: auto with flexbox and why it is so powerful, continue to use flexbox properties for easy palcement and alignment
+* we style image responsively giving them dimensions in % , also we display them as block to avoid white lines
+* to create a big gap in the middle of the flex items we use flex: 1 to expand asingle one. but we want to create a signle gap without stretching. this is done with margin:auto. in our case margin-right
+* svg items are inline elemtns and have a gap in height . either we use lineheight 0 and fontsize 0 or we style their parent element to flexbox
+* in animation when wee declare infinate after the time it becomes an infinite animation
+
+## Lecture 82 - Building the Description Section - Pt.1
+
+* continue to use flexbox, including *flex-wrap* to build a multicolumn list, how and why to use CSS masks with *mask-image* and *mask-size*
+* we use `flex-wrap: wrap;` to wrap flex item sin mulktiple lines and we use fixed width to each item
+* we add svg in css as a background image
+* the problem is that in that way we cannot change its color. to solve it we use masks
+* masks create a shape through which we see the background color. currently it is supported in webkit browsers. -webkit-mask-image (like bagkground0-image) and -webkit-mask-size like background-size
+* to add border without shrinking the image we use box-sizing: content-box and not border-box
+
+## Lecture 84 - Building the Users Reviews Section Pt.1
+
+* figure html elements are perfect for reviews
+* text is a blockquote
+* we add aglyph as pseydoelemt with ::before and style it
+
+## Lecture 85 - Building the CTA Section
+
+*
