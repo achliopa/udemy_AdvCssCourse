@@ -1083,4 +1083,12 @@ we use ems as rems does not work in all browsers
 
 ## Lecture 85 - Building the CTA Section
 
-*
+* we do acombination of transformY and top: -100% to hide and show alternatively 2 spans on a button
+
+## Lecture 86 - Writing Media Queries Pt.1
+
+* we will add breakpoints where design starts to break
+* we remove the background color at 1200 with margin:0 to the container
+* css varss do not work with media queries
+* at 900 sidebar goes on top
+* at 600 hotelview details go in column flex mode
