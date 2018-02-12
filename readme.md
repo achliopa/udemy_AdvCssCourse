@@ -741,6 +741,7 @@ becomes
 @include respond-phone {
 	font-size: 50%;
 }
+```
 
 * @content is the css properties or code we wrap in include. we can use the ability of mixins to accept variables as parameters to parametrize the mixin calls
 writing a media manager for all queries
@@ -1092,3 +1093,73 @@ we use ems as rems does not work in all browsers
 * css varss do not work with media queries
 * at 900 sidebar goes on top
 * at 600 hotelview details go in column flex mode
+* at 600 we need to fix the header, we will user flex order
+* i give search order: 1 to move it last, we add flex-wrap to parent element and in search item we make flex: 0 0 100% to make it use whole row
+
+# Section 8 - A QUick Introduction to CSS Grid Layouts
+
+## Lecture 90 - Why CSS Grid: A whole new mindset
+
+* CSS Grid Layout is a brand new module that brings a two dimensional grid system to CSS for the first time
+* CSS Grid replaces float layouts , using less, and more readable and logical CSS and HTML
+* CSS Grid works perfectly together with FLexbox, which is best for 1 dimension layouts and components
+* CSS Grid completely changes the way that we envision and build two-dimensional layouts
+* We apply it to a container (Grid COntainer by using `display: grid` or `display:grid-inline`)
+* It uses a column axis and a row axis laying out the Grid Items (Container children)
+* the horizontal and vertical lines that separate the container in rows and colymns are called grid lines and they are numbered automaticaly top to bottom and left to right the space between grid items is called gutter (alogn a line). the space between the lines is called grid track/row and grid track/column
+* The area between 2 horizontal and 2 vertical grid lines is called grid area. the area between 2 adjacent grid vertical and horizontal lines is called grid cell
+* firefox has the best devtools for css grid
+
+## Lecture 92 - Create Our First Grid
+
+* we can use chrome canary devtools as well/
+* we create a container with 6 items. we make it a grid contianer with `display: grid;`
+* we set the row and colum width with `grid-template-row: 150px 150px;` and `grid-template-column: 150px 150px 150px;`
+* if the colmns and rows we define are not enough for the items we have they are left below.
+* we define a gutter between rows with `grid-row-gap: 30px;` and between columns with `grid-column-gap: 30px;`. if we want the same gap everywhere we can use `grid-gap: `
+
+## Lecture 93 - Getting Familiar with the *fr* unit
+
+* instead of specifing width for each column/row we can use the repeat function  `grid-template-row: repeat(2, 150px);` we can mix  repeat with normal definition `grid-template-columns: repeat(2, 150px) 300px;`
+* if we want to expand to fill the available space like `flex: 1` in flexbox we use the fractional unit in CSS grid. e,g, `grid-template-columns: repeat(2, 150px) 1fr;` we can distribute the space evenly with `grid-template-columns: repeat(3, 1fr);` of course we can set width with % to make it adaptive (% doesnt count the gap)
+
+## Lecture 94 - Positioning Grid Items
+
+* we can explicitly define the grid cell where an item will be place with row-start/end and column-start/end
+
+```
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+```
+
+* there is a shorthand version for the above syntax
+
+```
+    grid-row: 1/2;
+    grid-column: 3/4;
+```
+
+* we can shorten it even further `grid-area: 1/3/2/4;`
+
+## Lecture 95 - Spanning Grid Items
+
+* to span my item in multiple cells i simply set the boundaries further e.g column-start: 2 and column-end: 4
+* the items shift to an implicit grid. also items set a speciffic cell dont shift. this happens when the placement is not forced on a set cell. then it covers the cell 
+* implicit grid has not set dimensions it is like inline.
+* we can have multile grid items in a cell
+* instead of setting end we can use span to set the number of cells span `grid-column: 1/ span 2;` is same as `grid-column: 1/ 3;`
+* to span till the end (last line) we use -1 `grid-column: 2/ -1;`
+
+## Lecture 98 - Naming Grid Lines
+
+* we can name lines by putting their name in brackets before sizing and after sizing of cols/rows
+
+```
+grid-template-rows: [header-start] 100px [header-end box-start] 200px [box-end main-start] 400px [main-end footer-start] 100px [footer-end];
+  grid-template-columns: repeat(3, [col-start] 1fr [col-end]) 200px [grid-end];
+```
+
+* in repeat before and after size naming is repeated lke col-start 1, col-start 2 etc
+* we can use these names instead of numbers in our code

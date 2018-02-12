@@ -16,6 +16,12 @@
 	align-items: center;
 	justify-content: center;
 
+	@media only screen and (max-width: $bp-smallest) {
+		order: 1;
+		flex: 0 0 100%;
+		background-color: var(--color-grey-light-2);
+	}
+
 	&__input {
 		color: inherit;
 		font-family: inherit;
@@ -25,7 +31,7 @@
 		padding: .7rem 2rem;
 		border-radius: 100px;
 		width: 90%;
-		margin: -3.25rem;
+		margin-right: -3.25rem;
 
 		&:focus {
 			outline: none;
@@ -407,15 +413,18 @@
 		margin-right: .7rem;
 
 		// older browsers
-		// background-image: url(../img/chevron-thin-right.svg);
-		// background-size: cover;
-
+		background-image: url(../img/chevron-thin-right.svg);
+		background-size: cover;
+		
 		// newer browsers - masks
-		background-color: var(--color-primary);
-		-webkit-mask-image: url(../img/chevron-thin-right.svg);
-		-webkit-mask-size: cover;
-		mask-image: url(../img/chevron-thin-right.svg);
-		mask-size: cover;
+		@supports (-webkit-mask-image: url()) or (mask-image: url()) {
+			background-color: var(--color-primary);
+			-webkit-mask-image: url(../img/chevron-thin-right.svg);
+			-webkit-mask-size: cover;
+			mask-image: url(../img/chevron-thin-right.svg);
+			mask-size: cover;
+			background-image: none;
+		}
 
 	}
 }
