@@ -1220,3 +1220,25 @@ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 * we have a sidebar on left from top to bottom a wide header with two columns, below the header we have a 3 by 2 grid, below a 2 column section, below a 3 by 3 grid, below a complex css grid with photos and under a footer. 8 part layout
 * we add the markup in html and give each element its own background color in its respective sass partial.
 * we add display grin in the container ad add grid-template-row of 80vh. so we make an adaptive first row dependig on viewport. second row in min-content adaptive to content. 3rd row is adaptive to viewport width 40vw. 4row is adaptive to content (min-content). same holds for the last two (footer)
+* we create 8 equaly sized columns ocuppying the viewport
+* we want our 8 basic columns to be fixed sized so we divide typical 1200px to 8 and get 14rem. we want them adaptive so we give minmax(min-content, 140px) as we want a container of max width 1200px. the first colmn is fixed to represent the sidebar
+* we add two flexible columns befor and after the 8 fixed to absorb the changes on viewport and keep the 8 fixed centered (full bleed sections)
+* we name the lines
+* we place the sidebar
+* usually we name and size only the columns
+* feats are occupying the 8 columns
+* gallery and footer occupy full size
+* homes only 8 columns
+* header and story are split in aspecific column
+* we see that frs go down to zero when shrinking the viewport. this pushes content to boundaries. we will use min max instead witha min of 6rem
+
+## Lecture 109 - Building the Features Section Pt.1
+
+* Lecture objectives: how and why to create grids inside grids, how to create responsive component without media queries, how to build a small component with CSS Grid
+* we add 6 divs in features. we will make the feature grid item a grid container for the 6 feature classes.
+* there is a technology for subgrids that snap their columns on the parent grid columns, this techology is not yet available.
+* we add sizing and content in the inner grid
+* we add css grid even to the feature itself to align icons (2*2 grid) even-though icon has a fixed width we use min-content to make it future proof (adaptive to possible new images)
+* -1 means the end of the explicit grid. if we define no rows there is no explicit grid rows . only overflow. defining cell size with span solves it
+* we aling feature text by adding align-items: start to features grid
+* we will apply the grid fluid technique to make the features geid responsive without media queries `grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));`
