@@ -1163,3 +1163,60 @@ grid-template-rows: [header-start] 100px [header-end box-start] 200px [box-end m
 
 * in repeat before and after size naming is repeated lke col-start 1, col-start 2 etc
 * we can use these names instead of numbers in our code
+
+## Lecture 100  - Implicit Grids vs Explicit Grids
+
+* the grid that we define with rows and columns is the explicit grid. the remaining grid items are positioned automatically by CSS grid in what we call implicit grid and is placed after the explicit grid. we can size the implicit grid with `grid-auto-rows: XX;` and `grid-auto-columns: XX;`
+* by default implicit grid items are laid out in below the explicit grid. if we define `grid-auto-flow: column;` they are laid out in columns on teh right of the explicit grid
+* implicit grid is perfect when we dont know how many items we will style 
+
+## Lecture 101 - Aligning Grid Items
+
+* like in flexbox we cal align the items with `align-items: `. this property aligns the grid item vertically in the grid area that is defined for it explicitly or implicitly. the default valu is stretch stretching item to cover all area.other vzalues are end,start,center
+* we have `justify-items` that aligns items along the row axis horizontaly. the default value is stretch
+* like flex we have `align-self:` property that align a specific item verticaly in its cell. in grid we hav elaso the `justify-self:`
+
+## Lecture 102 - Align Grid Tracks
+
+* to align the whole grid inside the grid container we use. for the horizontal axis `justify-content:` to the vertical axis `align-content:` 
+* the allowed values like flexbox are: start / end / center / space-between / space-around / space-evenly
+* if we want to avoid holes in our grid we use dense in our auto flow `grid-auto-flow: row dense;`
+
+## Lecture - using the min-content, max-content and minmax() function
+
+* max-content property is a sizing property in grid-template-column which sizes the cell according to the content tries to keep up with the content without causing any linebreak
+* min-content sizes the column width to fit as much content as possible using linebreaks
+* the two variables can be used for grid-templete-row as well with the same logic
+* if cells have a fixed dimension and content doesnt fit it overflows
+* minmax funtion gets 2 parameters min value and max value. css will adapt to the content size making sure that it stays within these two limits. if we use max or min-content as limit the size will adapt indefinetely from one side
+* with relative container size frs adapt indefinetely. minmax() adpats within the set boundaries
+
+## Lecture 104 - Responsive Layouts with auto-fit and auto-fill
+
+* these are very powerfull tools for responsive design. we can use instead of a number in repeat() function the param auto-fill. this combined with a fixed size `grid-template-columns: repeat(auto-fill,100px);` will fit as many items as possible in the track given their size. this combined with a relative container size will make it responsive and fluid placing them according to the screen size. auto fill makes as many tracks as they fit in the container even if the items are not enough
+
+* the difference with auto-fit is that auto-fit takes into account the available items and makes the grid large enough to fit them according to their size. this is done because emty cells collapse with a width of 0 `grid-template-columns: repeat(auto-fit, 100px);`
+* realtive container size with a responsive item size (minmax(100px, 1fr)) creates responsive items and responsive layout to screen size
+* this 2 combined with auto-row make a true adaptive design
+
+```
+width: 100vw;
+display: grid;
+grid-auto-rows:150px;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+```
+
+# Section 9 - Nexter Project Master CSS Grid Layouts!
+
+## Lecture 106 - Project Overview and Setup
+
+* CSS Grid Layout responsive project
+* one sass partial per component
+*  in base.scss we add the initialization code
+
+## Lecture 107 - Building the Overall Layout
+
+* Lecture objectives: how to build a complex and modern layout using advanced CSS grid techniques, how to choose different row and column track sizes for different types of content
+* we have a sidebar on left from top to bottom a wide header with two columns, below the header we have a 3 by 2 grid, below a 2 column section, below a 3 by 3 grid, below a complex css grid with photos and under a footer. 8 part layout
+* we add the markup in html and give each element its own background color in its respective sass partial.
+* we add display grin in the container ad add grid-template-row of 80vh. so we make an adaptive first row dependig on viewport. second row in min-content adaptive to content. 3rd row is adaptive to viewport width 40vw. 4row is adaptive to content (min-content). same holds for the last two (footer)
