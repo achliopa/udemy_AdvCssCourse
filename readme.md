@@ -1242,3 +1242,46 @@ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 * -1 means the end of the explicit grid. if we define no rows there is no explicit grid rows . only overflow. defining cell size with span solves it
 * we aling feature text by adding align-items: start to features grid
 * we will apply the grid fluid technique to make the features geid responsive without media queries `grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));`
+
+## Lecture 111 - Building the story section - Pt.1
+
+* Lecture Objectives: How to deal with overlapping grid items, why images are special and behave differently than other grid items, how to decide if flexbox is a better tool in certain situations
+* we add markup and styling
+* we dont hardcode margins in typography
+* story_content is a one dimension layout so its better to use flexbox
+* we do image position with grid. images are sized with 100% so they expand to the container size
+* we make a 6* 6 grid to position our images
+* we position photo on multiple rows and columns but it do not fill all area due to aspect-ratio
+
+## Lecture 113 - Buildding the Homes Section - Pt.1
+
+* Lecture Objectives: How to build a rather complex component using a mix of CSS Grid Properties, overlapping and Flexbox
+* a grid of 6 (3 x 2) cards.
+* we add markup and styling to each card, and we make it a grid with 2 columns
+* we want button to span 2 columns but it as no BEM class so we add it
+* we place the heart to the image using the grid overlapping feature. playing  with z-index
+* placement algorithm does not automaticaly place items on top of each other. if we give no freedom to the algorithm specifying fully the area (row/column) the the algorithm will overlap elements `justify-self: end; margin: 1rem;` places the like heart in the corner
+
+## Lecture 115 - Building the gallery - Pt.1
+
+* Lecture objectives: how to create a complex grid looking gallery, using object-fit together with images for grid items
+* when we have elements of various sizes to put in the grid the approach is to slect the row and column size to fit the smallest item. the number of lines is not fixed. it is try and error
+* images maintain their aspect ratio when resizing. this is done by relating teh height to the vh while expandin the width
+* we put pictures of various sizes in the grid. we add padding and line gap but still not perfect.
+* if we use object-fit: cover on an object its like background-size: cover
+* to make it work we need to add this: 
+
+```
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+```
+
+* we then set the grid cell size by column and row
+
+## Lecture 119 - Building the Header
+
+* Lecture Objetives: how to manage vertical spacing in a responsive layout using CSS Grid techniques, how to use ::before and ::after as grid items
+* header has 80% of viewport height
+* even text is a grid item .also pseudoelements ::before and ::after are grid items
