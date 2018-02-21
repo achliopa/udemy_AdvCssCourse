@@ -1285,3 +1285,23 @@ display: block;
 * Lecture Objetives: how to manage vertical spacing in a responsive layout using CSS Grid techniques, how to use ::before and ::after as grid items
 * header has 80% of viewport height
 * even text is a grid item .also pseudoelements ::before and ::after are grid items
+* for image we use min-content and for text max-content to avoid line breaks
+* for gaps we can use vh units to make them adaptive
+* justify items to center title
+
+## Lecture 122 - Writing Media Queries Pt.1
+
+* we fix header first. the logos images will be made adaptive by making the height  max-height and setting a axi-width of 100%
+
+```
+	max-height: 2.5rem;
+	max-width: 100%
+```
+
+* this doesnt work when we have set the column to max-content (tries to occupy max size). we change it to minmax(min-content, max-content)
+* we apply minmax also to the text row to make it adaptive
+* at 1200 we reduce rem def
+* at 1000 we move the sidebar from column to row by rearanging master grid. we remove first column and add a new row
+its good practice to name the columns and rows
+* at 700 realtors and stories break. realtors go below header 
+* at small screens we want min-content  size to adapt. if we remove size it is implicitly min-content (implicit grid)
